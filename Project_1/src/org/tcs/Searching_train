@@ -1,0 +1,49 @@
+package org.tcs;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Train_booking {
+	
+	public static void main(String[] args) throws InterruptedException {
+	
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://www.irctc.co.in/nget/train-search");
+		
+		driver.manage().window().maximize();
+
+		Thread.sleep(1200);
+	                            //from city
+		WebElement from = driver.findElement(By.xpath("(//input[@role='searchbox'])[1]"));
+		from.click();
+		Thread.sleep(1200);
+		
+		Select s=new Select(from);
+		s.selectByVisibleText("CHENNAI EGMORE - MS (CHENNAI)");
+		
+	                        	//to city
+		
+     	WebElement to = driver.findElement(By.xpath("(//input[@role='searchbox'])[2]"));
+	    to.click();
+	    Thread.sleep(1200);
+	
+	    Select n=new Select(to);
+	    n.selectByVisibleText("MADURAI JN - MDU (KODAIKANAL)");
+	
+	                           //date of journey
+	
+	   driver.findElement(By.xpath("(//input[@type='text'])[3]")).click();
+ 	   driver.findElement(By.xpath("//a[text()='30']")).click();
+ 	   
+ 	                         //classes
+	
+	   driver.findElement(By.xpath("//div[@class='ng-tns-c65-11 ui-dropdown ui-widget ui-state-default ui-corner-all']")).click();
+	   driver.findElement(By.xpath("//span[text()='Sleeper (SL)']")).click();
+	   
+	   driver.findElement(By.xpath("//button[@type='submit']")).click();
+	}
+
+}
