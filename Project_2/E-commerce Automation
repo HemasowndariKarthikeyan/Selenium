@@ -1,0 +1,58 @@
+package org.tcs;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Sign_In {
+	
+	public static void main(String[] args) throws InterruptedException, AWTException {
+		
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://www.nykaa.com/");
+		
+WebElement searchbar = driver.findElement(By.name("search-suggestions-nykaa"));
+searchbar.click();
+searchbar.sendKeys("face serum");
+Thread.sleep(1200);
+
+Robot r=new Robot();
+r.keyPress(KeyEvent.VK_DOWN);
+r.keyRelease(KeyEvent.VK_DOWN);
+
+r.keyPress(KeyEvent.VK_DOWN);
+r.keyRelease(KeyEvent.VK_DOWN);
+
+r.keyPress(KeyEvent.VK_DOWN);
+r.keyRelease(KeyEvent.VK_DOWN);
+
+r.keyPress(KeyEvent.VK_ENTER);
+r.keyRelease(KeyEvent.VK_ENTER);
+
+  
+	driver.findElement(By.xpath("//img[@alt='Estee Lauder Advanced Night Repair Synchronized Multi-Recovery Complex With Hyaluronic Acid (Serum)']")).click();
+	
+	
+	   Set<String> handles = driver.getWindowHandles();
+Iterator it=handles.iterator();
+	String parentId = (String) it.next();
+	String childId = (String) it.next();
+	driver.switchTo().window(childId);
+	
+	driver.findElement(By.xpath("//span[text()='20ml']")).click();
+	
+	
+	driver.findElement(By.xpath("(//span[text()='Add to Bag'])[1]")).click();
+	driver.findElement(By.xpath("//button[@class='css-aesrxy']//*[name()='svg']")).click();
+
+	}
+
+}
